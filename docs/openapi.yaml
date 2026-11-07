@@ -27,6 +27,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+        '400':
+          description: Invalid completed query parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: string
+                example:
+                  error: validation failed
+                  details:
+                    - completedmust be true or false
+      parameters:
+        - name: completed
+          in: query
+          required: false
+          description: Filter by completion status. Omit to return all tasks.
+          schema:
+            type: boolean
     post:
       summary: Create a new task
       tags:
